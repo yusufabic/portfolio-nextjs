@@ -1,6 +1,9 @@
+import { Form } from "@/components/form";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Label } from "@radix-ui/react-label";
 
 export default function GuestBookPage() {
@@ -12,26 +15,25 @@ export default function GuestBookPage() {
       </p>
       <Card className="mt-10">
         <CardHeader className="flex flex-col w-full">
-          <Label>Message</Label>
+          <Label className="mb-1">Message</Label>
           <GuestBookForm />
         </CardHeader>
       </Card>
     </section>
   );
 }
-function GuestBookForm() {
-  const user = false;
+async function GuestBookForm() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   if (user) {
-    return (
-      <div>
-        <h1>Hello</h1>
-      </div>
-    );
+    return <Form />;
   }
   return (
     <div className="flex justify-between gap-4 flex-col md:flex-row">
       <Input type="text" placeholder="Your Message..." />
-      <Button>Sign for free</Button>
+      <RegisterLink>
+        <Button>Sign for free</Button>
+      </RegisterLink>
     </div>
   );
 }
