@@ -1,5 +1,9 @@
-import Image from "next/image";
+import { Hero } from "./components/hero";
 
 export default function Home() {
-  return <h1>Hello this is index page</h1>;
+  return (
+    <div className="max-w-7xl w-full px-4 md:px-8 mx-auto">
+      <Hero />
+    </div>
+  );
 }
