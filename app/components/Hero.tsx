@@ -1,5 +1,5 @@
 import Image from "next/image";
-import me from "../../public/mila.jpeg";
+import me from "../../public/mila1.jpg";
 
 export function Hero() {
   return (
